@@ -42,6 +42,10 @@ fun ContentAddView(it:PaddingValues,
                    cronometroVM: CronometroViewModel,
                    dataVM : DataViewModel
 ){
+    val state = cronometroVM.state
+    LaunchedEffect(key1 = state.cronometroActivo){
+        cronometroVM.cronos()
+    }
     Column(
         modifier = Modifier
             .padding(it)
@@ -49,11 +53,6 @@ fun ContentAddView(it:PaddingValues,
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        val state = cronometroVM.state
-        LaunchedEffect(key1 = state.cronometroActivo){
-            cronometroVM.cronos()
-        }
-
         Text(text = formatTiempo(time = cronometroVM.time),
             fontSize = 50.sp,
             fontWeight = FontWeight.Bold)
